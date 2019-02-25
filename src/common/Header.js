@@ -3,17 +3,20 @@ import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 
 const Index = () => <h2>Home</h2>;
 const About = () => <h2>About</h2>;
-const Users = () => <h2>Users</h2>;
+const Drawer = () => <h2>Drawer</h2>;
 
 const Header = () => (
   <div>
     <nav>
       <ul>
         <li>
-          <Link to="/">Home</Link>
+          <Link to="/">Inicio</Link>
         </li>
         <li>
-          <Link to="/about">About</Link>
+          <Link to="/about">Acerca De</Link>
+        </li>
+        <li>
+          <Link to="/drawer">Drawer</Link>
         </li>
       </ul>
     </nav>

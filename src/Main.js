@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import Header from './common/Header';
 import App from './App';
 import About from './About';
+import Drawer from './Drawer';
 
 // The Main component renders one of the three provided
 // Routes (provided that one matches). Both the /roster
@@ -15,6 +16,7 @@ const Main = () => (
     <Switch>
       <Route exact path="/" component={App} />
       <Route path="/about/" component={About} />
+      <Route path="/drawer" component={Drawer} />
     </Switch>
   </div>
 );
