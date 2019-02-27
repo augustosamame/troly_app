@@ -1,6 +1,10 @@
-.App {
-  margin-right: 20px;
-  margin-left: 20px;
+.home {
+  text-align: center;
+  margin: auto;
+}
+
+.row {
+  display: inline-flex;
 }
 
 .App-logo {
@@ -9,6 +13,7 @@
   width: auto;
   height: 120;
   margin-bottom: 20px;
+  margin-top: 20px;
 }
 
 .App-header {
@@ -28,6 +33,7 @@
 
 .App-body {
   width: 400px;
+  margin: auto;
   margin-top: 50px;
   margin-bottom: 50px;
 }

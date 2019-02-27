@@ -1,47 +1,26 @@
 import React, { Component } from 'react';
 import ChequeListDetail from './ChequeListDetail';
 import Spinner from './common/Spinner';
-import * as api from './services/api';
 
 export default class ChequeList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      cheques: [],
+      filtered_cheques: [],
       showRemoveFilter: false,
       error: '',
-      loading: true
+      loading: false
     };
-    this.getCheques = this.getCheques.bind(this);
-    this.renderCheques = this.renderCheques.bind(this);
     this.selectCheque = this.selectCheque.bind(this);
     this.selectFilter = this.selectFilter.bind(this);
-    this.removeFilter = this.removeFilter.bind(this);
-    this.maybeShowRemoveFilter = this.maybeShowRemoveFilter.bind(this);
+
+    console.log(this.props)
   }
 
   componentDidMount() {
-    this.getCheques();
-  }
-
-  getCheques() {
     this.setState({
-      error: '',
-      loading: true
-    });
-    api.get(
-      '/cheques'
-    ).then((response) => {
-      this.setState({
-        cheques: response.data.data,
-        loading: false
-      });
-    }).catch(() => {
-      this.setState({
-        error: 'Error retrieving data',
-        loading: false
-      });
-    });
+      filtered_cheques: this.props.cheques,
+    })
   }
 
   selectCheque(chequeId) {
@@ -49,23 +28,30 @@ export default class ChequeList extends Component {
   }
 
   selectFilter(userName) {
-    this.allCheques = this.state.cheques
-    let filteredCheques = this.state.cheques.filter( function(obj) { return (obj.attributes.name === userName) } );
+    this.allCheques = this.props.cheques
+    let filteredCheques = this.props.cheques.filter( function(obj) { return (obj.attributes.name === userName) } );
     this.setState({
       showRemoveFilter: true,
-      cheques: filteredCheques,
+      filtered_cheques: filteredCheques,
     })
   }
 
   removeFilter() {
     this.setState({
       showRemoveFilter: false,
-      cheques: this.allCheques,
+      filtered_cheques: this.allCheques,
     })
   }
 
   renderCheques() {
-    return this.state.cheques.map(cheque => {
+    console.log("fired renderCheques")
+    let cheque_array = []
+    if (this.state.showRemoveFilter) {
+      cheque_array = this.state.filtered_cheques
+    } else {
+      cheque_array = this.props.cheques
+    }
+    return cheque_array.map(cheque => {
       return (
         <ChequeListDetail
           key={cheque.id}
@@ -111,6 +97,8 @@ export default class ChequeList extends Component {
     }
 
   render() {
+    console.log(this.props.cheques, "PROPS INSIDE RENDER")
+    console.log(this.state.filtered_cheques, "FILTERED_CHEQUES STATE INSIDE RENDER")
     return (
       <div className="ChequeDetail">
         <div className="App-body">
