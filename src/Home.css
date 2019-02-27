@@ -1,5 +1,10 @@
-.App {
+.home {
   text-align: center;
+  margin: auto;
+}
+
+.row {
+  display: inline-flex;
 }
 
 .App-logo {
@@ -7,6 +12,8 @@
   margin: auto;
   width: auto;
   height: 120;
+  margin-bottom: 20px;
+  margin-top: 20px;
 }
 
 .App-header {
@@ -35,11 +42,9 @@
   width: 100%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.List-body {
+  width: 400px;
+  margin: auto;
+  margin-top: 50px;
+  margin-bottom: 50px;
 }

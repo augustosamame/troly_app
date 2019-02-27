@@ -1,5 +1,5 @@
-//const ENDPOINT = 'http://localhost:3001'; // dev
-const ENDPOINT = 'https://api.ferretero.devtechperu.com'; // production
+const ENDPOINT = 'http://localhost:3001/api/v1';
+// const ENDPOINT = 'https://troly-api.herokuapp.com/api/v1';
 
 export {
   ENDPOINT,

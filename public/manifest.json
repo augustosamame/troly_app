@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Virtual Check Generator",
+  "name": "Virtual Cheque Generator Challenge for Troly.io",
   "icons": [
     {
       "src": "favicon.ico",
