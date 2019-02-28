@@ -14,6 +14,7 @@ class App extends React.Component {
       loading: true
     };
     this.getCheques = this.getCheques.bind(this);
+    this.goToNew = this.goToNew.bind(this);
   }
 
   componentDidMount() {
@@ -36,6 +37,12 @@ class App extends React.Component {
     });
   }
 
+  goToNew() {
+    console.log('gotonew');
+    var element_to_scroll_to = document.getElementById('chequeNewAnchor')
+    element_to_scroll_to.scrollIntoView();
+  }
+
   render() {
     const { cheques } = this.state;
     return (
@@ -44,14 +51,15 @@ class App extends React.Component {
           <img src={logo} className="App-logo" alt="logo" />
         </div>
         <div className="row">
-          <div className="col-sm-6">
-            <ChequeNew
-              refreshCheques={this.getCheques}
-            />
-          </div>
-          <div className="col-sm-6">
+          <div className="col-sm-12">
+          <button onClick={() => {this.goToNew()}}>Create New Cheque</button>
             <ChequeList
               cheques={cheques}
+            />
+          </div>
+          <div className="col-sm-12" id="chequeNewAnchor">
+            <ChequeNew
+              refreshCheques={this.getCheques}
             />
           </div>
         </div>

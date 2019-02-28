@@ -1,0 +1,29 @@
+.container {
+  position: relative;
+  text-align: center;
+  color: black;
+}
+
+.chequeName {
+  position: absolute;
+  top: 132px;
+  left: 300px;
+}
+
+.chequeDate {
+  position: absolute;
+  top: 78px;
+  left: 680px;
+}
+
+.chequeWords {
+  position: absolute;
+  top: 176px;
+  left: 235px;
+}
+
+.chequeValue {
+  position: absolute;
+  top: 132px;
+  left: 830px;
+}

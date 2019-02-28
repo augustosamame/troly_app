@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import numberstowords from '@rajch/numberstowords';
 import Spinner from './common/Spinner';
 import { FormErrors } from './common/FormErrors';
+import VirtualCheque from './VirtualCheque';
+import moment from 'moment';
 import './ChequeNew.css';
 import * as api from './services/api';
 
@@ -73,7 +75,8 @@ class ChequeNew extends Component {
         formErrors.chequeName = chequeNameValid ? '' : ' is too short';
         break;
       case 'chequeDate':
-        chequeDateValid = value.length >= 9;
+        //chequeDateValid = value.length >= 9;
+        chequeDateValid = moment(value, "MM/DD/YY", true).isValid();
         formErrors.chequeDate = chequeDateValid ? '' : ' is invalid';
         break;
       case 'chequeValue':
@@ -117,8 +120,13 @@ class ChequeNew extends Component {
     ).then((response) => {
       this.setState({
         loading: false,
+        chequeValue: '',
+        chequeName: '',
+        chequeDate: '',
+        chequeWords: '',
       });
       this.props.refreshCheques();
+      alert('cheque has been saved!');
     }).catch((error) => {
       console.log(error)
       this.setState({
@@ -130,7 +138,7 @@ class ChequeNew extends Component {
 
   render() {
     const {
-      chequeValue, chequeName, chequeDate, chequeWords, formErrors, formValid, error, loading
+      chequeValue, chequeName, chequeDate, formErrors, formValid, error, loading
     } = this.state;
     if (loading) {
       return (
@@ -150,20 +158,28 @@ class ChequeNew extends Component {
               <form onSubmit={this.handleSubmit} autoComplete="off">
                 <div className="form-group">
                   <label htmlFor="chequeName" className="label-form">
-                    Name:
+                    Recipient Name:
                     <input type="text" name="chequeName" className="form-control" value={chequeName} onChange={this.handleInputChange} />
                   </label>
                 </div>
                 <div className="form-group">
                   <label htmlFor="chequeDate" className="label-form">
-                    Date:
+                    Date (dd/mm/yy):
                     <input type="text" name="chequeDate" className="form-control" value={chequeDate} onChange={this.handleInputChange} />
                   </label>
                 </div>
                 <div className="form-group">
                   <label htmlFor="chequeValue" className="label-form">
                     Nominal Value:
-                    <input type="text" name="chequeValue" className="form-control" value={chequeValue} onChange={this.handleValueChange} />
+                    <input
+                      ref="input"
+                      type="text"
+                      name="chequeValue"
+                      className="form-control"
+                      value={chequeValue}
+                      onChange={this.handleValueChange}
+                      onFocus={()=>{this.refs.input.select()}}
+                    />
                   </label>
                 </div>
                 <input type="submit" className="btn btn-primary" disabled={!formValid} value="Save Cheque" />
@@ -171,14 +187,13 @@ class ChequeNew extends Component {
               <div className="error-label">
                 {error}
               </div>
-              <div className="cheque">
-                <label htmlFor="chequeWords" id="chequeWordsLabel" className="label-form">
-                  {chequeWords}
-                </label>
-              </div>
-              <br />
             </div>
           </div>
+        </div>
+        <div className="cheque">
+          <VirtualCheque
+            chequeFields={this.state}
+          />
         </div>
       </div>
     );

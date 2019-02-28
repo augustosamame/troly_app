@@ -13,8 +13,6 @@ export default class ChequeList extends Component {
     };
     this.selectCheque = this.selectCheque.bind(this);
     this.selectFilter = this.selectFilter.bind(this);
-
-    console.log(this.props)
   }
 
   componentDidMount() {
@@ -44,7 +42,6 @@ export default class ChequeList extends Component {
   }
 
   renderCheques() {
-    console.log("fired renderCheques")
     let cheque_array = []
     if (this.state.showRemoveFilter) {
       cheque_array = this.state.filtered_cheques
@@ -97,11 +94,9 @@ export default class ChequeList extends Component {
     }
 
   render() {
-    console.log(this.props.cheques, "PROPS INSIDE RENDER")
-    console.log(this.state.filtered_cheques, "FILTERED_CHEQUES STATE INSIDE RENDER")
     return (
       <div className="ChequeDetail">
-        <div className="App-body">
+        <div className="List-body">
           <div className="panel panel-default devise-bs">
             <div className="panel-heading">
               <h4>List of Cheques</h4>
