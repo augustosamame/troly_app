@@ -1,6 +1,7 @@
 import React from 'react';
 import ChequeNew from './ChequeNew';
 import ChequeList from './ChequeList';
+import Spinner from './common/Spinner';
 import * as api from './services/api';
 import './css/App.css';
 import logo from './assets/virtual_cheque_icon.png';
@@ -44,7 +45,12 @@ class App extends React.Component {
   }
 
   render() {
-    const { cheques } = this.state;
+    const { cheques, error, loading } = this.state;
+    if (loading) {
+      return (
+        <Spinner size={'large'} />
+      );
+    }
     return (
       <div className="home">
         <div>
@@ -52,7 +58,10 @@ class App extends React.Component {
         </div>
         <div className="row">
           <div className="col-sm-12">
-          <button onClick={() => {this.goToNew()}}>Create New Cheque</button>
+            <button onClick={() => {this.goToNew()}}>Create New Cheque</button>
+            <div className="error-label">
+              {error}
+            </div>
             <ChequeList
               cheques={cheques}
             />

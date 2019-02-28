@@ -38,6 +38,10 @@
   width: 100%;
 }
 
+.error-label {
+  color: red;
+}
+
 .List-body {
   width: 400px;
   margin: auto;

@@ -18,7 +18,7 @@ function ChequeListDetail(props) {
             currency="USD"
             decimal="."
             group=","
-            />
+          />
         </td>
         <td>
           <a href="#" onClick = {() => props.selectCheque(cheque.id)}>

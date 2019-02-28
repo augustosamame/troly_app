@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import numberstowords from '@rajch/numberstowords';
-import { completeNumberToWords } from './common/lib'
-import Spinner from './common/Spinner';
-import { FormErrors } from './common/FormErrors';
-import VirtualCheque from './VirtualCheque';
 import moment from 'moment';
+import { completeNumberToWords } from './common/lib';
+import Spinner from './common/Spinner';
+import FormErrors from './common/FormErrors';
+import VirtualCheque from './VirtualCheque';
 import './css/ChequeNew.css';
 import * as api from './services/api';
 
@@ -60,8 +59,7 @@ class ChequeNew extends Component {
         formErrors.chequeName = chequeNameValid ? '' : ' is too short';
         break;
       case 'chequeDate':
-        //chequeDateValid = value.length >= 9;
-        chequeDateValid = moment(value, "DD-MM-YY", true).isValid();
+        chequeDateValid = moment(value, 'DD-MM-Y', true).isValid();
         formErrors.chequeDate = chequeDateValid ? '' : ' is invalid';
         break;
       case 'chequeValue':
@@ -80,14 +78,16 @@ class ChequeNew extends Component {
   }
 
   validateForm() {
+    const { chequeNameValid, chequeDateValid, chequeValueValid } = this.state;
     this.setState({
-      formValid: this.state.chequeNameValid && this.state.chequeDateValid && this.state.chequeValueValid
+      formValid: chequeNameValid && chequeDateValid && chequeValueValid,
     });
   }
 
   handleSubmit(e) {
     e.preventDefault();
     const { chequeName, chequeDate, chequeValue } = this.state;
+    const { refreshCheques } = this.props;
     const newCheque = {
       cheque: {
         name: chequeName,
@@ -102,7 +102,7 @@ class ChequeNew extends Component {
     api.post(
       '/cheques',
       newCheque,
-    ).then((response) => {
+    ).then(() => {
       this.setState({
         loading: false,
         chequeValue: '',
@@ -110,13 +110,12 @@ class ChequeNew extends Component {
         chequeDate: '',
         chequeWords: '',
       });
-      this.props.refreshCheques();
+      refreshCheques();
       alert('cheque has been saved!');
     }).catch((error) => {
-      console.log(error)
       this.setState({
         error: 'Error Creating Cheque',
-        loading: false
+        loading: false,
       });
     });
   }
@@ -158,12 +157,12 @@ class ChequeNew extends Component {
                     Nominal Value:
                     <input
                       ref="input"
-                      type="text"
+                      type="number"
                       name="chequeValue"
                       className="form-control"
                       value={chequeValue}
                       onChange={this.handleValueChange}
-                      onFocus={()=>{this.refs.input.select()}}
+                      onFocus={()=>{ this.refs.input.select(); }}
                     />
                   </label>
                 </div>
