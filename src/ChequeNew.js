@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import numberstowords from '@rajch/numberstowords';
+import { completeNumberToWords } from './common/lib'
 import Spinner from './common/Spinner';
 import { FormErrors } from './common/FormErrors';
 import VirtualCheque from './VirtualCheque';
@@ -33,26 +34,10 @@ class ChequeNew extends Component {
     this.setState(
       {
         chequeValue: target.value,
-        chequeWords: this.singularize(numberstowords.toInternationalWords(target.value,
-          {
-            useCurrency: true,
-            majorCurrencySymbol: 'dollars',
-            minorCurrencySymbol: 'cents',
-            integerOnly: false,
-            majorCurrencyAtEnd: true,
-            useCase: 'proper',
-          })),
+        chequeWords: completeNumberToWords(target.value),
       },
       () => { this.validateField('chequeValue', target.value); },
     );
-  }
-
-  singularize(currencyString) {
-    var newString = currencyString.replace(" And ", " and " ).replace("Dollars", "dollars").replace("Cents","cents");
-    if (newString.startsWith("One dollars")) {
-      newString = newString.replace("One dollars","One dollar")
-    }
-    return newString
   }
 
   handleInputChange(event) {
@@ -138,7 +123,7 @@ class ChequeNew extends Component {
 
   render() {
     const {
-      chequeValue, chequeName, chequeDate, formErrors, formValid, error, loading
+      chequeValue, chequeName, chequeDate, chequeWords, formErrors, formValid, error, loading
     } = this.state;
     if (loading) {
       return (

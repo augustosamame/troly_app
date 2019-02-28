@@ -2,28 +2,29 @@
   position: relative;
   text-align: center;
   color: black;
+  width: 950px;
 }
 
 .chequeName {
   position: absolute;
   top: 132px;
-  left: 300px;
+  left: 200px;
 }
 
 .chequeDate {
   position: absolute;
   top: 78px;
-  left: 680px;
+  left: 580px;
 }
 
 .chequeWords {
   position: absolute;
   top: 176px;
-  left: 235px;
+  left: 135px;
 }
 
 .chequeValue {
   position: absolute;
   top: 132px;
-  left: 830px;
+  left: 730px;
 }

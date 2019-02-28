@@ -1,6 +1,9 @@
-import React, { Component } from 'react';
+import React, { Fragment, Component } from 'react';
 import ChequeListDetail from './ChequeListDetail';
 import Spinner from './common/Spinner';
+import Modal from './common/modal/Modal';
+import VirtualCheque from './VirtualCheque';
+import { completeNumberToWords } from './common/lib';
 
 export default class ChequeList extends Component {
   constructor(props) {
@@ -9,7 +12,9 @@ export default class ChequeList extends Component {
       filtered_cheques: [],
       showRemoveFilter: false,
       error: '',
-      loading: false
+      loading: false,
+      isShowing: false,
+      chosenCheque: []
     };
     this.selectCheque = this.selectCheque.bind(this);
     this.selectFilter = this.selectFilter.bind(this);
@@ -23,6 +28,31 @@ export default class ChequeList extends Component {
 
   selectCheque(chequeId) {
     console.log(chequeId);
+    this.openModalHandler(chequeId)
+  }
+
+  openModalHandler = (chequeId) => {
+    const cheque = this.props.cheques.filter(function(item) {
+      return item.id == parseInt(chequeId, 10);
+    });
+    console.log(this.props.cheques);
+    console.log(cheque);
+    let friendlyCheque = {
+      chequeName: cheque[0].attributes.name,
+      chequeDate: cheque[0].attributes.date,
+      chequeValue: cheque[0].attributes.value_cents / 100,
+      chequeWords: completeNumberToWords(cheque[0].attributes.value_cents / 100),
+    }
+    this.setState({
+      isShowing: true,
+      chosenCheque: friendlyCheque,
+    });
+    }
+
+  closeModalHandler = () => {
+    this.setState({
+      isShowing: false
+    });
   }
 
   selectFilter(userName) {
@@ -94,7 +124,21 @@ export default class ChequeList extends Component {
     }
 
   render() {
+    const {
+      isShowing, chequeName, chequeDate, formErrors, formValid, error, loading, chosenCheque
+    } = this.state;
     return (
+      <Fragment>
+        { isShowing ? <div onClick={this.closeModalHandler} className="back-drop"></div> : null }
+        <Modal
+          className="modal"
+          show={isShowing}
+          close={this.closeModalHandler}
+        >
+          <VirtualCheque
+            chequeFields={chosenCheque}
+          />
+        </Modal>
       <div className="ChequeDetail">
         <div className="List-body">
           <div className="panel panel-default devise-bs">
@@ -109,6 +153,7 @@ export default class ChequeList extends Component {
           </div>
         </div>
       </div>
+      </Fragment>
     );
   }
 }

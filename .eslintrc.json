@@ -1,15 +1,12 @@
 {
     "extends": "airbnb",
+    "parser": "babel-eslint",
     "env": {
       "browser": true,
       "node": true,
       "jasmine": true
     },
     "rules": {
-      "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-      "jsx-a11y/anchor-is-valid": [ "off", {
-        "components": [ "Link" ],
-        "specialLink": [ "to" ]
-      }]
-    },
+      "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+    }
 }
