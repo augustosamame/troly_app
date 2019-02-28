@@ -1,7 +1,7 @@
 import React from 'react';
 import BlankCheque from './assets/blankCheque.png';
 import Currency from 'react-currency-formatter';
-import './VirtualCheque.css';
+import './css/VirtualCheque.css';
 
 const VirtualCheque = ({ chequeFields }) => (
   <div className="container">

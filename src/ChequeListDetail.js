@@ -1,6 +1,6 @@
 import React from 'react';
 import Currency from 'react-currency-formatter';
-import './ChequeList.css';
+import './css/ChequeList.css';
 
 function ChequeListDetail(props) {
   const { cheque } = props;

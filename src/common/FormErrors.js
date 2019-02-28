@@ -1,6 +1,6 @@
 import React from 'react';
 import { friendlyField } from './lib'
-import '../FormErrors.css';
+import '../css/FormErrors.css';
 
 export const FormErrors = ({formErrors}) =>
   <div className='formErrors'>

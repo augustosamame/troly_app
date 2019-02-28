@@ -3,6 +3,10 @@
   margin-left: 20px;
 }
 
+.error-label {
+  color: red;
+}
+
 .App-logo {
   display: block;
   margin: auto;

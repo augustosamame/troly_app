@@ -2,7 +2,7 @@ import React from 'react';
 import ChequeNew from './ChequeNew';
 import ChequeList from './ChequeList';
 import * as api from './services/api';
-import './App.css';
+import './css/App.css';
 import logo from './assets/virtual_cheque_icon.png';
 
 class App extends React.Component {

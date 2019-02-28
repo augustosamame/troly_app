@@ -4,7 +4,7 @@ import Spinner from './common/Spinner';
 import { FormErrors } from './common/FormErrors';
 import VirtualCheque from './VirtualCheque';
 import moment from 'moment';
-import './ChequeNew.css';
+import './css/ChequeNew.css';
 import * as api from './services/api';
 
 class ChequeNew extends Component {
@@ -76,7 +76,7 @@ class ChequeNew extends Component {
         break;
       case 'chequeDate':
         //chequeDateValid = value.length >= 9;
-        chequeDateValid = moment(value, "MM/DD/YY", true).isValid();
+        chequeDateValid = moment(value, "DD-MM-YY", true).isValid();
         formErrors.chequeDate = chequeDateValid ? '' : ' is invalid';
         break;
       case 'chequeValue':
@@ -130,7 +130,7 @@ class ChequeNew extends Component {
     }).catch((error) => {
       console.log(error)
       this.setState({
-        error: 'Error creating Cheque',
+        error: 'Error Creating Cheque',
         loading: false
       });
     });
@@ -164,7 +164,7 @@ class ChequeNew extends Component {
                 </div>
                 <div className="form-group">
                   <label htmlFor="chequeDate" className="label-form">
-                    Date (dd/mm/yy):
+                    Date (dd-mm-yy):
                     <input type="text" name="chequeDate" className="form-control" value={chequeDate} onChange={this.handleInputChange} />
                   </label>
                 </div>
