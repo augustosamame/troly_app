@@ -54,7 +54,8 @@
     cursor: pointer;
     font-weight: bold;
     outline: none;
-    padding: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .btn-cancel {
@@ -65,6 +66,10 @@
 .btn-continue {
     background-color: #1b5e20;
     float: right;
+}
+
+.btn-snapshot {
+  float: left;
 }
 
 .back-drop {

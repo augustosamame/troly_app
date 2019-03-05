@@ -1,4 +1,6 @@
 import React, { Fragment, Component } from 'react';
+import domtoimage from 'dom-to-image';
+import { saveAs } from 'file-saver';
 import ChequeListDetail from './ChequeListDetail';
 import Modal from './common/modal/Modal';
 import VirtualCheque from './VirtualCheque';
@@ -45,6 +47,13 @@ export default class ChequeList extends Component {
     this.setState({
       isShowing: false,
     });
+  }
+
+  snapshotModalHandler = () => {
+    domtoimage.toBlob(document.getElementById('cheque-container'))
+      .then(function (blob) {
+          saveAs(blob, 'virtual-cheque.png');
+      });
   }
 
   selectCheque(chequeId) {
@@ -128,6 +137,7 @@ export default class ChequeList extends Component {
           className="modal"
           show={isShowing}
           close={this.closeModalHandler}
+          snapshot={this.snapshotModalHandler}
         >
           <VirtualCheque
             chequeFields={chosenCheque}

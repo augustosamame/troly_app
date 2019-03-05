@@ -4,7 +4,7 @@ import BlankCheque from './assets/blankCheque.png';
 import './css/VirtualCheque.css';
 
 const VirtualCheque = ({ chequeFields }) => (
-  <div className="container">
+  <div className="container" id="cheque-container">
     <div className="chequeName">
       { chequeFields.chequeName }
     </div>

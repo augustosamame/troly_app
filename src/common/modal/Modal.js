@@ -3,7 +3,7 @@ import React from 'react';
 import './Modal.css';
 
 const modal = (props) => {
-  const { show, close, children } = props
+  const { show, close, snapshot, children } = props
   return (
     <div>
       <div
@@ -19,7 +19,9 @@ const modal = (props) => {
         <div className="modal-body">
           {children}
         </div>
+        
         <div className="modal-footer">
+          <button className="btn-snapshot" onClick={props.snapshot}>Export to Image</button>
           <button className="btn-cancel" onClick={props.close}>Close</button>
         </div>
       </div>
